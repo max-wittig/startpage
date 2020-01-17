@@ -1,0 +1,15 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run tests
+        run: |
+          yarn
+          yarn lint:prettier
+          yarn lint:vue
