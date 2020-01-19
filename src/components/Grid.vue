@@ -10,6 +10,7 @@
           :icon="app.icon"
           :iconType="app.iconType"
           :showName="app.showName"
+          :source="app.source"
           />
       </b-row>
     </b-container>

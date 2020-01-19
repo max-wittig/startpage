@@ -2,28 +2,39 @@
   <div>
     <a :href="url">
     <b-container>
-      <div id="app">
-      <b-row>
-        <b-col>
-          <p v-if="showName">
-            {{ name }}
-          </p>
-        </b-col>
-      </b-row>
-      <b-row>
-      <b-col>
-        <font-awesome-icon
-        size="4x"
-        :icon="[iconType, icon]"
-        v-if="icon"
-        fixed-width
-        />
-        <img 
-        :src="imageUrl"
-        v-else-if="imageUrl"
-        />
-      </b-col>
-      </b-row>
+      <div :class="['app', sourceClass]">
+        <b-row v-if="source">
+          <b-col lg="1" offset-lg="9">
+            <a :href="source">
+              <font-awesome-icon
+                size="1x"
+                :icon="['fas', 'code-branch']"
+                fixed-width
+              />
+            </a>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <p v-if="showName">
+              {{ name }}
+            </p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <font-awesome-icon
+            size="4x"
+            :icon="[iconType, icon]"
+            v-if="icon"
+            fixed-width
+            />
+            <img 
+            :src="imageUrl"
+            v-else-if="imageUrl"
+            />
+          </b-col>
+        </b-row>
       </div>
     </b-container>
     </a>
@@ -63,11 +74,21 @@ export default {
       default: true,
       required: false,
     },
+    source: {
+      type: String,
+      default: "",
+      required: false,
+    }
+  },
+  computed: {
+    sourceClass: function() {
+      return this.source != "" ? "source" : "no-source"
+    }
   }
 };
 </script>
 <style scoped>
-#app {
+.app {
   border: 1px solid #9e9e9e;
   background: #e0e0e0;
   width: 20%;
@@ -75,21 +96,21 @@ export default {
   min-width: 20vh;
   min-height: 20vh;
   max-height: 20vh;
-  padding: 5vh;
+  padding: 2vh;
   margin: 3vh;
+}
+.app.no-source {
+  padding: 4vh;
 }
 img {
   width: 8vh;
   height: 8vh;
 }
-a {
-  color: black;
+a,a:hover {
+  color: #212121;
+  text-decoration: none;
 }
 p {
   color: #616161;
-}
-a:hover {
-  color: black;
-  text-decoration: none;
 }
 </style>
